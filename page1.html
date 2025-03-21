@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Google</title>
+  <link id="favicon" rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Hello, world!</h1>
+  <script src="script.js"></script>
+  <button>
+ <a href="page0.html" title="Idk what to but here">Go back to Home Page</a>
+<button onclick="changeTabInfo('https://cdn.iconscout.com/icon/free/png-256/free-google-drive-logo-icon-download-in-svg-png-gif-file-formats--workspace-logos-icons-2416659.png?f=webp', 'My Drive - Google Drive')">Google Drive</button>
+    <script>
+      function changeTabInfo(faviconURL, tabTitle) {
+        document.title = tabTitle;
+        let newFavicon = document.createElement("link");
+        newFavicon.rel = "icon";
+        newFavicon.type = "image/png";
+        newFavicon.href = faviconURL + "?" + new Date().getTime();
+        let oldFavicon = document.getElementById("favicon");
+        if (oldFavicon) {
+          document.head.removeChild(oldFavicon);
+        }
+        document.head.appendChild(newFavicon);
+        newFavicon.id = "favicon";
+        localStorage.setItem("tabTitle", tabTitle);
+        localStorage.setItem("faviconURL", faviconURL);
+      }
+      function loadSavedTabInfo() {
+        let savedTitle = localStorage.getItem("tabTitle");
+        let savedFavicon = localStorage.getItem("faviconURL");
+        if (savedTitle && savedFavicon) {
+          document.title = savedTitle;
+          let newFavicon = document.createElement("link");
+          newFavicon.rel = "icon";
+          newFavicon.type = "image/png";
+          newFavicon.href = savedFavicon;
+          let oldFavicon = document.getElementById("favicon");
+          if (oldFavicon) {
+            document.head.removeChild(oldFavicon);
+          }
+          document.head.appendChild(newFavicon);
+          newFavicon.id = "favicon";
+        }
+      }
+      window.onload = loadSavedTabInfo;
+    </script>
+</body>
+</html>
