@@ -1,50 +1,241 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-   <title>Google</title>
-  <link id="favicon" rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png" />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            margin: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        button {
+            padding: 14px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            background: white;
+            color: black;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+            margin: 10px;
+        }
+
+        button:hover {
+            background: #1E1E1E;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        a {
+            color: cyan;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 20px;
+            display: block;
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+    </style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <script src="script.js"></script>
-  <button>
- <a href="page0.html" title="Idk what to but here">Go back to Home Page</a>
-<button onclick="changeTabInfo('https://cdn.iconscout.com/icon/free/png-256/free-google-drive-logo-icon-download-in-svg-png-gif-file-formats--workspace-logos-icons-2416659.png?f=webp', 'My Drive - Google Drive')">Google Drive</button>
+
+    <h1>Main Page</h1>
+    <p>Click below to open the about:blank cloaking page.</p>
+
+    <button onclick="openInAboutBlank()">Open About:Blank Page</button>
+
     <script>
-      function changeTabInfo(faviconURL, tabTitle) {
-        document.title = tabTitle;
-        let newFavicon = document.createElement("link");
-        newFavicon.rel = "icon";
-        newFavicon.type = "image/png";
-        newFavicon.href = faviconURL + "?" + new Date().getTime();
-        let oldFavicon = document.getElementById("favicon");
-        if (oldFavicon) {
-          document.head.removeChild(oldFavicon);
+        let blankWindow;
+
+        function openInAboutBlank() {
+            blankWindow = window.open("about:blank", "_blank");
+
+            if (blankWindow) {
+                setTimeout(loadMainPage, 100);
+            } else {
+                alert("Pop-up blocked! Please allow pop-ups for this site.");
+            }
         }
-        document.head.appendChild(newFavicon);
-        newFavicon.id = "favicon";
-        localStorage.setItem("tabTitle", tabTitle);
-        localStorage.setItem("faviconURL", faviconURL);
-      }
-      function loadSavedTabInfo() {
-        let savedTitle = localStorage.getItem("tabTitle");
-        let savedFavicon = localStorage.getItem("faviconURL");
-        if (savedTitle && savedFavicon) {
-          document.title = savedTitle;
-          let newFavicon = document.createElement("link");
-          newFavicon.rel = "icon";
-          newFavicon.type = "image/png";
-          newFavicon.href = savedFavicon;
-          let oldFavicon = document.getElementById("favicon");
-          if (oldFavicon) {
-            document.head.removeChild(oldFavicon);
-          }
-          document.head.appendChild(newFavicon);
-          newFavicon.id = "favicon";
+
+        function loadMainPage() {
+            if (!blankWindow || blankWindow.closed) return;
+
+            let doc = blankWindow.document;
+            doc.open();
+            doc.write(`
+                <html>
+                <head>
+                    <title>About:Blank Page</title>
+                    <link id="favicon" rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg">
+                    <style>
+                        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+                        body {
+                            background-color: black;
+                            color: white;
+                            font-family: 'Inter', sans-serif;
+                            text-align: center;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            height: 100vh;
+                            margin: 0;
+                        }
+
+                        h1 {
+                            font-size: 32px;
+                            font-weight: 600;
+                        }
+
+                        p {
+                            font-size: 18px;
+                            font-weight: 300;
+                            opacity: 0.8;
+                        }
+
+                        button {
+                            padding: 14px 24px;
+                            font-size: 16px;
+                            font-weight: 500;
+                            background: white;
+                            color: black;
+                            border: none;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            transition: all 0.3s ease-in-out;
+                            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+                            margin: 10px;
+                        }
+
+                        button:hover {
+                            background: #1E1E1E;
+                            color: white;
+                            transform: translateY(-2px);
+                        }
+
+                        a {
+                            color: cyan;
+                            text-decoration: none;
+                            font-size: 18px;
+                            margin-top: 20px;
+                            display: block;
+                            transition: all 0.3s ease-in-out;
+                        }
+
+                        a:hover {
+                            text-decoration: underline;
+                            opacity: 0.8;
+                        }
+                    </style>
+                    <script>
+                        function changeTabInfo(icon, title) {
+                            document.title = title;
+                            document.getElementById('favicon').href = icon;
+                            localStorage.setItem('tabTitle', title);
+                            localStorage.setItem('tabFavicon', icon);
+                        }
+
+                        function loadSettingsPage() {
+                            document.body.innerHTML = \`
+                                <h1>Settings</h1>
+                                <p>Customize your tab experience.</p>
+
+                                <input type="text" id="customTitle" placeholder="Enter new title">
+                                <button onclick="changeTitle()">Apply</button>
+
+                                <br><br>
+
+                                <button onclick="loadMainContent()">Go Back</button>
+                            \`;
+
+                            let savedTitle = localStorage.getItem('tabTitle');
+                            let savedFavicon = localStorage.getItem('tabFavicon');
+                            if (savedTitle) document.title = savedTitle;
+                            if (savedFavicon) document.getElementById('favicon').href = savedFavicon;
+                        }
+
+                        function loadMainContent() {
+                            document.body.innerHTML = \`
+                                <h1>About:Blank Page</h1>
+                                <p>Choose an option below:</p>
+
+                                <button onclick="changeTabInfo('https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Google_Drive_icon_%282020%29.svg/512px-Google_Drive_icon_%282020%29.svg.png', 'Home - Google Drive')">
+                                    Google Drive
+                                </button>
+                                <button onclick="changeTabInfo('https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png', 'Google Classroom')">
+                                    Google Classroom
+                                </button>
+                                <button onclick="changeTabInfo('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png', 'Google')">
+                                    Google
+                                </button>
+
+                                <br><br>
+
+                                <a href="#" onclick="loadSettingsPage(); return false;">Go to Settings</a>
+                            \`;
+                        }
+
+                        function changeTitle() {
+                            let newTitle = document.getElementById('customTitle').value;
+                            if (newTitle) {
+                                document.title = newTitle;
+                                localStorage.setItem('tabTitle', newTitle);
+                            }
+                        }
+
+                        window.onload = function() {
+                            let savedTitle = localStorage.getItem('tabTitle');
+                            let savedFavicon = localStorage.getItem('tabFavicon');
+                            if (savedTitle) document.title = savedTitle;
+                            if (savedFavicon) document.getElementById('favicon').href = savedFavicon;
+                        };
+                    <\/script>
+                </head>
+                <body>
+                    <h1>About:Blank Page</h1>
+                    <p>Choose an option below:</p>
+                    <button onclick="changeTabInfo('https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png', 'Google Classroom')">Google Classroom</button>
+                    <button onclick="changeTabInfo('https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg', 'Google')">Google</button>
+                    <a href="#" onclick="loadSettingsPage(); return false;">Go to Settings</a>
+                </body>
+                </html>
+            `);
+            doc.close();
         }
-      }
-      window.onload = loadSavedTabInfo;
     </script>
+
 </body>
 </html>
